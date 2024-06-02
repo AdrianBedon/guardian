@@ -9,7 +9,7 @@ import lombok.*;
 @Entity
 @Getter @Setter
 public class Activo {
-	
+	//comentario
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
