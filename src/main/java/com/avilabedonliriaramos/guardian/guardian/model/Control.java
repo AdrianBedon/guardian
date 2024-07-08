@@ -24,13 +24,15 @@ public class Control {
 	private String codigo;
 	
 	@Required
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	private Eficiencia eficiencia;
 	
 	@Required
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ ]+", message = "Las acciones solo deben contener letras y espacios")
 	private String acciones;
 	
 	@Required
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ ]+", message = "La definición solo debe contener letras y espacios")
 	private String definicion;
 	
 	@Required

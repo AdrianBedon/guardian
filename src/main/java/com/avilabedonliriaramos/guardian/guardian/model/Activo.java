@@ -19,7 +19,7 @@ public class Activo {
 	private Long id;
 	
 	@Required
-	@Pattern(regexp = "[A-Za-z]+", message = "El nombre solo debe contener letras")
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ ]+", message = "El nombre solo debe contener letras")
 	private String nombre;
 	
 	@Required
@@ -29,7 +29,7 @@ public class Activo {
 	
 	@Required
 	@Size(min = 5, max = 50, message = "La descripción debe tener entre 5 y 50 caracteres")
-	@Pattern(regexp = "[A-Za-z]+", message = "La descripción solo debe contener letras")
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ ]+", message = "La descripción solo debe contener letras")
 	private String descripcion;
 		
 	@Required
@@ -38,12 +38,12 @@ public class Activo {
 	
 	@Required
 	@Size(min = 5, max = 50, message = "El proceso debe tener entre 5 y 50 caracteres")
-	@Pattern(regexp = "[A-Za-z]+", message = "El proceso solo debe contener letras")
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ ]+", message = "El proceso solo debe contener letras")
 	private String proceso;
 	
 	@Required
 	@Size(min = 5, max = 50, message = "La ubicación debe tener entre 5 y 50 caracteres")
-	@Pattern(regexp = "[A-Za-z]+", message = "La ubicación solo debe contener letras")
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ0-9 ]+", message = "La ubicación solo debe contener letras, números y espacios")
 	private String ubicacion;
 	
 	@Required
@@ -80,13 +80,31 @@ public class Activo {
 	
 	@PrePersist @PreUpdate
     private void calculateClasificacion() {
-        int sum = valorSeguridad.getValue() +
-                  valorPrivacidad.getValue() +
-                  valorReputacion.getValue() +
-                  valorLegal.getValue() +
-                  valorOperaciones.getValue() +
-                  valorEconomico.getValue();
-        int average = sum / 6;
-        clasificacion = (average == 1) ? "No Crítico" : "Crítico";
+        float criticidadCalculo = (float)(valorSeguridad.getValue() + valorPrivacidad.getValue() + 
+                                          valorReputacion.getValue() + valorLegal.getValue() + 
+                                          valorOperaciones.getValue() + valorEconomico.getValue()) / 6.0f;
+        int criticidad;
+        if (criticidadCalculo >= 1 && criticidadCalculo < 1.5) {
+            criticidad = 1;
+        } else if (criticidadCalculo >= 1.5 && criticidadCalculo < 2.5) {
+            criticidad = 2;
+        } else {
+            criticidad = 3;
+        }
+
+        this.clasificacion = (criticidad == 1) ? "No crítico" : "Crítico";
+    }
+
+    public int getCriticidad() {
+        float criticidadCalculo = (float)(valorSeguridad.getValue() + valorPrivacidad.getValue() + 
+                                          valorReputacion.getValue() + valorLegal.getValue() + 
+                                          valorOperaciones.getValue() + valorEconomico.getValue()) / 6.0f;
+        if (criticidadCalculo >= 1 && criticidadCalculo < 1.5) {
+            return 1;
+        } else if (criticidadCalculo >= 1.5 && criticidadCalculo < 2.5) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 }

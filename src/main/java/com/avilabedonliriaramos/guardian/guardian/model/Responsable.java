@@ -17,17 +17,17 @@ public class Responsable {
 	private Long id;
 	
 	@Required
-	@Pattern(regexp = "[A-Za-z]+", message = "El nombre solo debe contener letras")
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ ]+", message = "El nombre solo debe contener letras y espacios")
 	@Size(min = 1, max = 50, message = "El nombre debe tener entre 1 y 50 caracteres")
 	private String nombre;
 	
 	@Required
-	@Pattern(regexp = "[A-Za-z]+", message = "La posición solo debe contener letras")
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ ]+", message = "La posición solo debe contener letras y espacios")
 	@Size(min = 1, max = 50, message = "La posición debe tener entre 1 y 50 caracteres")
 	private String posicion;
 	
 	@Required
 	@Email(message = "Debe proporcionar un correo electrónico válido")
-	@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{4,}$", message = "Debe proporcionar un correo electrónico válido")
+	@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", message = "Debe proporcionar un correo electrónico válido")
 	private String email;
 }

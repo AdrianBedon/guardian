@@ -22,7 +22,7 @@ public class Amenaza {
 	private String codigo;
 	
 	@Required
-	@Pattern(regexp = "[A-Za-z]+", message = "El tipo solo debe contener letras")
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ ]+", message = "El tipo solo debe contener letras")
 	@Size(min = 1, max = 50, message = "El tipo debe tener entre 1 y 50 caracteres")
 	private String tipo;
 	
@@ -35,7 +35,7 @@ public class Amenaza {
 	private Boolean hardware;
 	
 	@Required
-	@Pattern(regexp = "[A-Za-z]+", message = "El origen solo debe contener letras")
+	@Pattern(regexp = "[A-Za-zÁÉÍÓÚáéíóúñÑ ]+", message = "El origen solo debe contener letras")
 	@Size(min = 1, max = 50, message = "El tipo debe tener entre 1 y 50 caracteres")
 	private String origen;
 }
