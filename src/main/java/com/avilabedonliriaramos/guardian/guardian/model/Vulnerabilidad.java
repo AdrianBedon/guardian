@@ -19,16 +19,20 @@ public class Vulnerabilidad {
 	
 	private int valorRiesgo;
 	
+	@Required
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Amenaza amenaza;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Control controlAplicado;
 	
+	@Required
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Activo activo;
 	
+	@Required
 	private int nivelVulnerabilidad;
 	
+	@Required
 	private int nivelAmenaza;
 }
